@@ -1,0 +1,5 @@
+(load "fixed-point-of-transform.scm")
+(load "damp.scm")
+(load "newton-transform.scm")
+(define (sqrt-direct x) (fixed-point-of-transform (lambda (y) (/ x y)) damp 1.0))
+(define (sqrt-newton x) (fixed-point-of-transform (lambda (y) (- (square y) x)) newton-transform 1.0))

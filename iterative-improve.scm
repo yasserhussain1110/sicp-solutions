@@ -1,0 +1,6 @@
+(define (iterative-improve good-enough? improve-guess)
+  (define (keep-improving guess x) (if (good-enough? guess x)
+				       (improve-guess guess x)
+				       (keep-improving (improve-guess guess x) x)))
+  (lambda (guess x)
+    (keep-improving guess x)))

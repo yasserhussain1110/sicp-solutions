@@ -1,0 +1,7 @@
+(define (power a b)
+    (define (fast-power-iter s a b) (cond ((= b 0) s)
+                                            ((is_odd? b) (fast-power-iter (* s a) a (- b 1)))
+                                            (else (fast-power-iter s (square a) (half b)))))
+    (define (is_odd? n) (= (remainder n 2) 1))
+    (define (half n) (/ n 2))
+    (fast-power-iter 1 a b))
