@@ -1,5 +1,0 @@
-(define (test a)
-  ;(define (fourple x) (* 4 x))
-  (lambda (x)
-    (let ((fourple (lambda (z) (square (* 4 z)))))
-      (* (fourple a) x))))
