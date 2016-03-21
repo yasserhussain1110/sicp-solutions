@@ -1,0 +1,5 @@
+(define (cc amount list-of-coins)
+  (cond ((= 0 amount) 1)
+	((or (< amount 0) (no-more? list-of-coins)) 0)
+	(else (+ (cc amount (except-first-denom list-of-coins))
+		 (cc (- amount (first-denom list-of-coins)) list-of-coins)))))
