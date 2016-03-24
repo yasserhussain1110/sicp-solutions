@@ -1,0 +1,15 @@
+(define (square-tree-1 t)
+    (if (null? t)
+      '()
+      (let ((first-part (car t)) (rest-part (cdr t)))
+	(if (not (pair? first-part))
+	    (cons (square first-part) (square-tree-1 rest-part))
+	    (cons (square-tree-1 first-part) (square-tree-1 rest-part))))))
+
+(define (square-tree-2 t)
+  (map (lambda (x)
+	 (if (not (pair? x))
+	     (square x)
+	     (square-tree-2 x)))
+       t))
+

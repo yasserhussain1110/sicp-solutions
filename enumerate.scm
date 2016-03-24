@@ -1,0 +1,7 @@
+(define (enumerate-tree tree)
+(display tree)
+(newline)
+(cond ((null? tree) '())
+      ((not (pair? tree)) (list tree))
+      ((pair? tree) (append (enumerate-tree (car tree))
+			    (enumerate-tree (cdr tree))))))

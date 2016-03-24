@@ -1,0 +1,15 @@
+(define (tree-map-1 f t)
+  (if (null? t)
+      '()
+      (let ((first-part (car t)) (rest-part (cdr t)))
+	(if (not (pair? first-part))
+	    (cons (f first-part) (tree-map-1 f rest-part))
+	    (cons (tree-map-1 f first-part) (tree-map-1 f rest-part))))))
+
+(define (tree-map-2 f t)
+  (map (lambda (x)
+	 (if (not (pair? x))
+	     (f x)
+	     (tree-map-2 f x)))
+       t))
+
