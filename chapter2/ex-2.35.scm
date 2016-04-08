@@ -1,10 +1,6 @@
 (load "accumulate.scm")
 (define (count-leaves t)
-  (accumulate (lambda (x y)
-		(display x)
-		(newline)
-		(cond ((null? x) y)
-		      ((pair? x) (+ y (count-leaves (cdr x)) (count-leaves (car x))))
-		      (else (+ y 1))))
-	      0
-	      t))
+  (accumulate + 0
+	      (map (lambda (x)
+		     (cond ((not (pair? x)) 1)
+			   (else (count-leaves x)))) t)))
