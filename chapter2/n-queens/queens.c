@@ -1,18 +1,11 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
+#include"queens.h"
 
 int row_positions[50];
 
 int no_of_solutions = 0;
-
-bool safe(int, int);
-
-void handle_found_solution(int);
-
-void queen_cols(int, int);
-
-void print_final_result();
 
 void print_final_result() {
     printf("Total number of solutions found: %i\n", no_of_solutions);
