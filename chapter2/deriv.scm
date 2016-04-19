@@ -49,5 +49,5 @@
 	   (make-sum
 	    (make-product (multiplier expr) multiplicand-deriv)
 	    (make-product (multiplicand expr) multiplier-deriv))))
-	(else (display "Unknown Expression" exp))
+	(else (error "Unknown Expression" expr))
 	))

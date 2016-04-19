@@ -34,5 +34,5 @@
 	   (make-product exp-expo
 			 (make-product (make-exponentiation exp-base (- exp-expo 1))
 				       (deriv exp-base var)))))
-	(else (display "Unknown Expression" exp))
+	(else (error "Unknown Expression" expr))
 	))
