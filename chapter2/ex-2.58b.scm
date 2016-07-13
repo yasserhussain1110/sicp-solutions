@@ -13,7 +13,7 @@
 
 (define (sum? expr)
   (and (pair? expr)
-       (not (eq? #f (memq '+ expr)))))
+       (not (eq? false (memq '+ expr)))))
 
 (define (addend expr)
   (let ((part (part-of-list-upto-symbol '+ expr)))
@@ -36,7 +36,7 @@
 (define (product? expr)
   (and (pair? expr)
        (not (sum? expr))
-       (not (eq? #f (memq '* expr)))))
+       (not (eq? false (memq '* expr)))))
 
 (define (multiplier expr)
   (let ((part (part-of-list-upto-symbol '* expr)))

@@ -28,9 +28,9 @@
 (define (safe? soln)
   (define (safe-iter? k-queen-pos rest-queens)
     (if (null? rest-queens)
-	#t
+	true
 	(let ((k-prev-queen-pos (car rest-queens)))
-	  (if (queens-pos-attack k-queen-pos k-prev-queen-pos) #f (safe-iter? k-queen-pos (cdr rest-queens))))))
+	  (if (queens-pos-attack k-queen-pos k-prev-queen-pos) false (safe-iter? k-queen-pos (cdr rest-queens))))))
   (safe-iter? (car soln) (cdr soln)))
 
 (define (queens n)

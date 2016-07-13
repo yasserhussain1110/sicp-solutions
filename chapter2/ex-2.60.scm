@@ -1,6 +1,6 @@
 (define (element-of-set? x set)
-  (cond ((null? set) #f)
-	((equal? (car set) x) #t)
+  (cond ((null? set) false)
+	((equal? (car set) x) true)
 	(else (element-of-set? x (cdr set)))))
 
 (define (adjoin-set x set)

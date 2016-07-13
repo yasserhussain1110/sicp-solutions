@@ -25,8 +25,8 @@
 (define (safe? k soln)
   (define (is-safe-iter? index rest-soln k-th-pos)
     (if (= k index)
-	#t
-	(if (do-queens-attack? (car rest-soln) k-th-pos) #f (is-safe-iter? (+ index 1) (cdr rest-soln) k-th-pos))))
+	true
+	(if (do-queens-attack? (car rest-soln) k-th-pos) false (is-safe-iter? (+ index 1) (cdr rest-soln) k-th-pos))))
 
   (is-safe-iter? 1 soln (get-k-th-element soln k)))
 

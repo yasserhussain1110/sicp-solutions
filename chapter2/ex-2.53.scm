@@ -12,10 +12,10 @@
 
 
 (pair? (car '(a short list)))
-#f
+false
 
 (memq 'red '((red shoes) (blue socks)))
-#f
+false
 
 (memq 'red '(red shoes blue socks))
 (red shoes blue socks)
