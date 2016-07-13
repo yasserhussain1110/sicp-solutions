@@ -1,0 +1,5 @@
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((= (car set) x) #t)
+	((> (car set) x) false)
+	(else (element-of-set? x (cdr set)))))
