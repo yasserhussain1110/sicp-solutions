@@ -1,4 +1,4 @@
-(load "environment.scm")
+(load "op-type-table.scm")
 (define (apply-generic op . args)
   (let ((type-tags (map type-tag args)))
     (let ((proc (get op type-tags)))

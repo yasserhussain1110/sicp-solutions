@@ -1,4 +1,4 @@
-(load "environment.scm")
+(load "op-type-table.scm")
 
 ;; common stuff
 
