@@ -6,7 +6,7 @@
 
   (define (make-from-real-imag x y) ((get 'make-from-real-imag 'rectangular) x y))
 
-  (define (make-from-mag-ang x y) ((get 'make-from-real-imag 'polar) x y))
+  (define (make-from-mag-ang x y) ((get 'make-from-mag-ang 'polar) x y))
 
   (define (add x y) (make-from-real-imag
                      (+ (real-part x) (real-part y))

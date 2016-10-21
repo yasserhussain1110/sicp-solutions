@@ -32,6 +32,8 @@
      (* (numer x) (denom y))
      (* (denom x) (numer y))))
 
+  (define (tag x) (attach-tag 'rational x))
+
   (put 'add '(rational rational) (lambda (x y) (tag (add-rat x y))))
   (put 'sub '(rational rational) (lambda (x y) (tag (sub-rat x y))))
   (put 'mul '(rational rational) (lambda (x y) (tag (mul-rat x y))))
