@@ -11,6 +11,8 @@
   (define (numer x) (car x))
   
   (define (denom x) (cdr x))
+
+  (put 'equ? '(real real) =)
   
   (put 'equ? '(rational rational) (lambda (x y) (=
                                                  (* (numer x) (denom y))
