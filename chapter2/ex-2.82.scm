@@ -44,7 +44,7 @@
 (install-rational-package)
 (install-rectangular-package)
 (install-polar-package)
-(install-comlex-package)
+(install-complex-package)
 
 (put-coercion 'scheme-number 'rational (lambda (x) (make-rational-number (contents x) 1)))
 (put-coercion 'scheme-number 'complex (lambda (x) (make-complex-from-real-imag (contents x) 0)))
