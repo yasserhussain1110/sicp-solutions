@@ -1,8 +1,10 @@
 (load "op-type-table.scm")
 (load "packages.scm")
-(load "math-op.scm")
 
-(define (install-comlex-package)
+(define (install-complex-package)
+
+  (install-rectangular-package)
+  (install-polar-package)
 
   (define (make-from-real-imag x y) ((get 'make-from-real-imag 'rectangular) x y))
 
@@ -46,9 +48,7 @@
 
   'done)
 
-(install-rectangular-package)
-(install-polar-package)
-(install-comlex-package)
+(install-complex-package)
 
 (define (make-complex-from-real-imag x y)
   ((get 'make-from-real-imag 'complex) x y))

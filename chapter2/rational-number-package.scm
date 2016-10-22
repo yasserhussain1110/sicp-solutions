@@ -48,3 +48,6 @@
 (define (make-rational-number x y)
   ((get 'make 'rational) x y))
 
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+
