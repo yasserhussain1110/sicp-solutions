@@ -46,6 +46,8 @@
 
   (put 'magnitude '(complex) (lambda (x) (magnitude x)))
 
+  (put 'angle '(complex) (lambda (x) (angle x)))
+
   'done)
 
 (install-complex-package)
@@ -55,5 +57,3 @@
 
 (define (make-complex-from-mag-ang x y)
   ((get 'make-from-mag-ang 'complex) x y))
-
-  
