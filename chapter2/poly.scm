@@ -1,3 +1,7 @@
+(load "math-op.scm")
+(load "scheme-number-package.scm")
+(load "mod-op-type-table.scm")
+
 (define (install-polynomial-package)
 
   (define (same-variable? x y)
@@ -13,14 +17,14 @@
     (cdr poly))
 
   (define (add-poly poly1 poly2)
-    (if (same-variable? (variable poly1) (varibale poly2))
+    (if (same-variable? (variable poly1) (variable poly2))
         (make-poly (variable poly1) (add-terms (term-list poly1)
                                                (term-list poly2)))
 
         (error "Polys not in same var -- ADD-POLY" (list poly1 poly2))))
 
   (define (mul-poly poly1 poly2)
-    (if (same-variable? (variable poly1) (varibale poly2))
+    (if (same-variable? (variable poly1) (variable poly2))
         (make-poly (variable poly1) (mul-terms (term-list poly1)
                                                (term-list poly2)))
 
@@ -77,11 +81,22 @@
 
   (define (tag p) (attach-tag 'polynomial p))
 
+  (put 'make 'polynomial (lambda (var term-list) (tag (make-poly var term-list))))
+
   (put 'add '(polynomial polynomial) (lambda (p1 p2) (tag (add-poly p1 p2))))
 
   (put 'mul '(polynomial polynomial) (lambda (p1 p2) (tag (mul-poly p1 p2))))
 
   'done)
 
+
+;; For test
+(install-polynomial-package)
+(install-scheme-number-package)
+(add 1 2)
 (define (make-polynomial var terms)
-  ((get 'make polynomial) var terms))
+  ((get 'make 'polynomial) var terms))
+
+(define p1 (make-polynomial 'x '((2 1) (0 1))))
+(define p2 (make-polynomial 'x '((3 1) (0 1))))
+(add p1 p2)
