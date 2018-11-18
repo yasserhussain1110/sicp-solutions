@@ -1,0 +1,20 @@
+(define (make-wire)
+  (let ((signal 0) (event-handlers '()))
+    (define (set-signal new-signal)
+      (begin (set! signal new-signal)
+             (map (lambda (f) (f)) event-handlers)
+             'updated))
+    (define (get-signal) signal)
+
+    (define (register-handler handler)
+      (begin
+        (set! event-handlers (append event-handlers (list handler)))
+        (handler)
+        'registered))
+
+    (define (wire command . args)
+      (cond ((eq? command 'set-signal) (apply set-signal args))
+            ((eq? command 'get-signal) (apply get-signal args))
+            ((eq? command 'register-handler) (apply register-handler args))
+            (else (error "Error: UNKNOWN COMMAND"))))
+    wire))
