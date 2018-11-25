@@ -10,6 +10,8 @@
 
 (define and-propogation-time 2)
 
+(define not-propogation-time 3)
+
 (define (make-two-in-one-out-gate delay logical-function)
   (lambda (wire1 wire2 wire-out)
     (define (handler)
@@ -39,6 +41,20 @@
 (define or (make-two-in-one-out-gate or-propogation-time logical-or))
 (define and (make-two-in-one-out-gate and-propogation-time logical-and))
 
+(define (logical-not a)
+  (cond ((= a 0) 1)
+        ((= a 1) 0)
+        (else (error "Invalid Signal" a))))
+
+(define (inverter wire-in wire-out)
+  (define (handler)
+    (let ((new-value (logical-not (wire-in 'get-signal))))
+      (add-to-agenda! (+ (time-agenda the-agenda) not-propogation-time)
+                      (lambda () (wire-out 'set-signal new-value))
+                      the-agenda)))
+  (wire-in 'register-handler handler)
+  'connected)
+
 (define A (make-wire))
 (define B (make-wire))
 (define OUT (make-wire))
@@ -47,6 +63,6 @@
 (A 'get-signal)
 (B 'get-signal)
 (OUT 'get-signal)
-(propogate the-agenda)
-(propogate the-agenda)
+(propogate-once)
+(propogate-once)
 (OUT 'get-signal)

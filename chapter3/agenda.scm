@@ -51,12 +51,21 @@
           (let ((q (procedure-queue first-time-segment)))
             (begin
               (set-time! the-agenda (segment-time first-time-segment))
-              ((front-queue q))
-              (delete-queue! q)
-              (if (empty-queue? q)
-                    (set-segments! agenda (cdr segments)))))))))
+              (let ((current-action (front-queue q)))
+                (delete-queue! q)
+                (if (empty-queue? q)
+                    (set-segments! agenda (cdr segments)))
+                current-action)))))))
 
-(define propogate remove-from-agenda!)
+(define (propogate) (if (empty? the-agenda)
+                        'done
+                        (begin ((remove-from-agenda! the-agenda))
+                               (propogate))))
+
+(define (propogate-once) (if (empty? the-agenda)
+                             'done
+                             ((remove-from-agenda! the-agenda))))
+                        
 
 ;(define (p1 x) (+ x 1))
 ;(define (p2 x) (* x x))
