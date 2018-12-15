@@ -6,22 +6,22 @@
 
 (define the-agenda (make-agenda))
 
-(define or-propogation-time 1)
+(define or-propogation-time 5)
 
-(define and-propogation-time 2)
+(define and-propogation-time 3)
 
-(define not-propogation-time 3)
+(define not-propogation-time 2)
 
 (define (make-two-in-one-out-gate delay logical-function)
   (lambda (wire1 wire2 wire-out)
     (define (handler)
-      (let ((new-value (logical-function (wire1 'get-signal) (wire2 'get-signal))))
+      (let ((new-value (logical-function (get-signal wire1) (get-signal wire2))))
         (add-to-agenda!
          (+ delay (time-agenda the-agenda))
-         (lambda () (wire-out 'set-signal new-value))
+         (lambda () (set-signal! wire-out new-value))
          the-agenda)))
-    (wire1 'register-handler handler)
-    (wire2 'register-handler handler)
+    (register-handler! wire1 handler)
+    (register-handler! wire2 handler)
     'connected))
 
 (define (logical-or a b)
@@ -48,21 +48,33 @@
 
 (define (inverter wire-in wire-out)
   (define (handler)
-    (let ((new-value (logical-not (wire-in 'get-signal))))
+    (let ((new-value (logical-not (get-signal wire-in))))
       (add-to-agenda! (+ (time-agenda the-agenda) not-propogation-time)
-                      (lambda () (wire-out 'set-signal new-value))
+                      (lambda () (set-signal! wire-out new-value))
                       the-agenda)))
-  (wire-in 'register-handler handler)
+  (register-handler! wire-in handler)
   'connected)
 
+(define (half-adder a b s c)
+  (let ((d (make-wire)) (e (make-wire)))
+    (or a b d)
+    (and a b c)
+    (inverter c e)
+    (and d e s)
+    'ok))
+
+; Time of propogation - and-delay + inverter-delay + and-delay = 2 * and-delay + inverter-delay
+; (Assuming and-delay + inverter-delay > or-delay)
+#|
 (define A (make-wire))
 (define B (make-wire))
 (define OUT (make-wire))
-(A 'set-signal 1)
+(set-signal! A 1)
 (or A B OUT)
-(A 'get-signal)
-(B 'get-signal)
-(OUT 'get-signal)
+(get-signal A)
+(get-signal B)
+(get-signal OUT)
 (propogate-once)
 (propogate-once)
-(OUT 'get-signal)
+(get-signal OUT)
+|#
