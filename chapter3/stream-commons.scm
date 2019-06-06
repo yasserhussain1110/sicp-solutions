@@ -12,10 +12,16 @@
 (define (take s n)
   (cons (stream-car s) (take (stream-cdr s) (- n 1))))
 
+(define (partial-sums s)
+  (define p (cons-stream (stream-car s) (add-streams (stream-cdr s) p)))
+  p)
+
 (define (display-stream s n)
   (if
     (eq? n 0)
-		(display "...")
+		(begin
+      (display "...")
+      (newline))
     (begin
       (display (stream-car s))
 	    (newline)
