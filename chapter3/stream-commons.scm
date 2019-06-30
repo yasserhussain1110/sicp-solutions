@@ -26,3 +26,10 @@
       (display (stream-car s))
 	    (newline)
 	    (display-stream (stream-cdr s) (- n 1)))))
+
+(define (integral delayed-integrand initial-value dt)
+  (define int
+    (cons-stream initial-value
+      (let ((integrand (force delayed-integrand)))
+        (add-streams (scale-stream integrand dt) int))))
+  int)
